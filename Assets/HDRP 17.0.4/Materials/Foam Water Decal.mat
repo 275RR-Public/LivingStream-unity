@@ -7,14 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Waterfall_foam
-  m_Shader: {fileID: -6465566751694194690, guid: fd1b36078062ad741ba2c130242cdf01, type: 3}
+  m_Name: Foam Water Decal
+  m_Shader: {fileID: -6465566751694194690, guid: 9f1661ed5b4d6ee4685ad5683b09a903, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _AFFECTS_FOAM
-  m_InvalidKeywords:
   - _TYPE_SPHERE
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -47,11 +47,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AffectDeformation: 1
+    - _AffectDeformation: 0
     - _AffectFoam: 1
-    - _AffectLargeCurrent: 0
-    - _AffectRipplesCurrent: 0
-    - _AffectSimulationMask: 0
     - _Cubic_Blend: 1
     - _Elevation: 0.2
     - _Remap_Max: 1
