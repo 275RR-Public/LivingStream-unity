@@ -24,8 +24,6 @@ public class ObjectTracking : MonoBehaviour
 {
     public GameObject trackedPersonPrefab; // Assign in Inspector with an empty game object, "TrackingManager"
     public WaterSurface river;          // Assign the river GameObject to TrackingManager
-    public Camera mainCamera;           // Assign the Main Camera to TrackingManager
-    private Vector3 cameraOffset;       // Store the camera’s initial X and Z offset
     private UdpClient udpClient;
     private Dictionary<int, GameObject> trackedObjects = new Dictionary<int, GameObject>();
     private ConcurrentQueue<List<TrackData>> trackingDataQueue = new ConcurrentQueue<List<TrackData>>();
@@ -50,24 +48,6 @@ public class ObjectTracking : MonoBehaviour
         if (river == null)
         {
             Debug.LogWarning("river WaterSurface not assigned in ObjectTracking!");
-        }
-
-        if (mainCamera == null)
-        {
-            Debug.LogWarning("Main Camera not assigned! Attempting to use Camera.main.");
-            mainCamera = Camera.main;
-        }
-
-        if (mainCamera != null)
-        {
-            // Set the camera offset using initial X and Z positions (Y=0 for water surface)
-            cameraOffset = new Vector3(mainCamera.transform.position.x, 0f, mainCamera.transform.position.z);
-            Debug.Log($"Camera offset set to: {cameraOffset}");
-        }
-        else
-        {
-            Debug.LogError("Main Camera not found! Tracked objects will not be offset correctly.");
-            cameraOffset = Vector3.zero; // Fallback to no offset
         }
     }
 
@@ -120,9 +100,7 @@ public class ObjectTracking : MonoBehaviour
                     Vector3 realSensePos = new Vector3(track.position[0], track.position[1], track.position[2]);
                     Debug.Log($"RealSense position: {realSensePos}");
 
-                    // Apply camera offset to X and Z, keep Y at 0 for water surface
-                    Vector3 unityPos = new Vector3(realSensePos.x + cameraOffset.x, 0f, realSensePos.z + cameraOffset.z);
-                    //Vector3 unityPos = new Vector3(realSensePos.x, 0f, realSensePos.z);
+                    Vector3 unityPos = new Vector3(realSensePos.x, 0f, realSensePos.z);
                     Debug.Log($"Unity position: {unityPos}");
 
                     targetPositions[id] = unityPos;
