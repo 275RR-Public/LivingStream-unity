@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainUIStyle.uss?fileID=7433441132597879392&amp;guid=4241be2a33650004487465a679dca5b0&amp;type=3#MainUIStyle" />
+    <ui:VisualElement style="flex-grow: 1; height: 90%; align-items: center; justify-content: flex-end; align-self: center; align-content: center; margin-bottom: 20px;">
+        <ui:Button text="Back" name="LivingStreamButton" class="all-button" style="opacity: 0.5;" />
+    </ui:VisualElement>
+</ui:UXML>

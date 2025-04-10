@@ -285,7 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: e2616eb837c2c274ea96364f7b0916cf, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 6d2d1e69ed47a374a9d3bb9d7c620b31, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: ef9a1c2df8ee0e444ad6ceff199d2e09, type: 3}
   m_SortingOrder: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
@@ -355,7 +355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5889939155403416882, guid: 33d9e955f195ee547ac2bfc586f383a1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.94454
+      value: 0.680111
       objectReference: {fileID: 0}
     - target: {fileID: 5889939155403416882, guid: 33d9e955f195ee547ac2bfc586f383a1, type: 3}
       propertyPath: m_LocalScale.z
@@ -367,7 +367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5889939155403416882, guid: 33d9e955f195ee547ac2bfc586f383a1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.09
+      value: -1.3545
       objectReference: {fileID: 0}
     - target: {fileID: 5889939155403416882, guid: 33d9e955f195ee547ac2bfc586f383a1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2865,7 +2865,7 @@ Transform:
   m_GameObject: {fileID: 1333586064}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.22268695, z: -0, w: 0.97489005}
-  m_LocalPosition: {x: 36.299988, y: 4.2657237, z: 7.399996}
+  m_LocalPosition: {x: 36.299988, y: 4.2657237, z: 7.399992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
