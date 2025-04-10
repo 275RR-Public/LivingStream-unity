@@ -1,42 +1,63 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections;
-using UnityEngine.SceneManagement; // Added for scene loading
+using UnityEngine.SceneManagement;
 
 public class MainUIHandler : MonoBehaviour
 {
-    // Public fields to assign in the Unity Inspector
-    public GameObject ocean;                    // Reference to the Ocean GameObject
-    public Light directionalLight;              // Reference to the Directional Light
-    public GameObject quadLogo;                 // Reference to the QuadLogo GameObject
-    public GameObject planeBlack;               // Reference to the PlaneBlack GameObject
-    public GameObject sphereRed;                // Reference to the SphereRed GameObject
-    public GameObject sphereBlue;               // Reference to the SphereBlue GameObject
-    public float oceanLowerAmount = 1f;         // Amount to lower the ocean's Y-position
-    public float lightIntensityChange = 0.5f;   // Amount to change the light intensity
-    public float quadMoveAmount = 2f;           // Amount to move the quad downwards when washing off
+    // Existing public fields (unchanged)
+    public GameObject ocean;
+    public Light directionalLight;
+    public GameObject quadLogo;
+    public GameObject planeBlack;
+    public GameObject sphereRed;
+    public GameObject sphereBlue;
+    public float oceanLowerAmount = 1f;
+    public float lightIntensityChange = 0.5f;
+    public float quadMoveAmount = 2f;
+    private const string calibrationText1 = "Arham Ali";
+    private const string calibrationText2 = "Will Forbes";
+    private const string calibrationText3 = "Bryan Ukeje";
+    private const string calibrationText4 = "James Hofer";
 
-    // Private fields to store original values and state
-    private Vector3 originalOceanPosition;      // Stores the ocean's initial position
-    private float originalLightIntensity;       // Stores the light's initial intensity
-    private Vector3 originalQuadPosition;       // Stores the quad's initial position
-    private Vector3 originalPlaneBlackPosition; // Stores the PlaneBlack's initial position
-    private Vector3 originalCameraPosition;     // Stores the camera's initial position
-    private Quaternion originalCameraRotation;  // Stores the camera's initial rotation
-    private Vector3 originalSphereRedPosition;  // Stores the SphereRed's initial position
-    private Vector3 originalSphereBluePosition; // Stores the SphereBlue's initial position
-    private bool isTideLowered = false;         // Tracks whether the tide is lowered
-    private Coroutine currentTransition;        // Reference to the current transition coroutine
-    private AudioSource backgroundMusic;        // Reference to the AudioSource on Main Camera
-    private float originalVolume;               // Stores the original volume of the AudioSource
-    private GameObject mainCamera;              // Reference to the Main Camera
+    // Existing private fields (unchanged)
+    private Vector3 originalOceanPosition;
+    private float originalLightIntensity;
+    private Vector3 originalQuadPosition;
+    private Vector3 originalPlaneBlackPosition;
+    private Vector3 originalCameraPosition;
+    private Quaternion originalCameraRotation;
+    private Vector3 originalSphereRedPosition;
+    private Vector3 originalSphereBluePosition;
+    private bool isTideLowered = false;
+    private Coroutine currentTransition;
+    private AudioSource backgroundMusic;
+    private float originalVolume;
+    private GameObject mainCamera;
+
+    // Private fields for text (removed target font sizes)
+    private Label text1;
+    private Label text2;
+    private Label text3;
+    private Label text4;
+    private string originalText1;
+    private string originalText2;
+    private string originalText3;
+    private string originalText4;
+    private float originalText1FontSize;
+    private FontStyle originalText1FontStyle;
+    private float originalText2FontSize;
+    private FontStyle originalText2FontStyle;
+    private float originalText3FontSize;
+    private FontStyle originalText3FontStyle;
+    private float originalText4FontSize;
+    private FontStyle originalText4FontStyle;
 
     void Start()
     {
-        // Get the root visual element from the UI Document
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        // Store original values for ocean, light, QuadLogo, PlaneBlack, camera, spheres, and audio
+        // Store original values for existing elements (unchanged)
         if (ocean != null) originalOceanPosition = ocean.transform.position;
         if (directionalLight != null) originalLightIntensity = directionalLight.intensity;
         if (quadLogo != null) originalQuadPosition = quadLogo.transform.position;
@@ -46,29 +67,62 @@ public class MainUIHandler : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera");
         if (mainCamera != null)
         {
-            originalCameraPosition = mainCamera.transform.position;   
-            originalCameraRotation = mainCamera.transform.rotation;   
+            originalCameraPosition = mainCamera.transform.position;
+            originalCameraRotation = mainCamera.transform.rotation;
             backgroundMusic = mainCamera.GetComponent<AudioSource>();
             if (backgroundMusic != null) originalVolume = backgroundMusic.volume;
         }
 
-        // Get references to UI buttons
+        // Query UI elements (unchanged)
         var toggleCalibrate = root.Q<Button>("CalibrateButton");
         var playButton = root.Q<Button>("PlayButton");
         var quitButton = root.Q<Button>("QuitButton");
+        text1 = root.Q<Label>("text1");
+        text2 = root.Q<Label>("text2");
+        text3 = root.Q<Label>("text3");
+        text4 = root.Q<Label>("text4");
 
-        // Set up the Play Button to load the LivingStream scene
+        // Store original text content and styles, ensure initial visibility
+        if (text1 != null)
+        {
+            originalText1 = text1.text;
+            originalText1FontSize = text1.resolvedStyle.fontSize;
+            originalText1FontStyle = text1.resolvedStyle.unityFontStyleAndWeight;
+            text1.style.opacity = new StyleFloat(1f); // Ensure visible
+        }
+        if (text2 != null)
+        {
+            originalText2 = text2.text;
+            originalText2FontSize = text2.resolvedStyle.fontSize;
+            originalText2FontStyle = text2.resolvedStyle.unityFontStyleAndWeight;
+            text2.style.opacity = new StyleFloat(1f);
+        }
+        if (text3 != null)
+        {
+            originalText3 = text3.text;
+            originalText3FontSize = text3.resolvedStyle.fontSize;
+            originalText3FontStyle = text3.resolvedStyle.unityFontStyleAndWeight;
+            text3.style.opacity = new StyleFloat(1f);
+        }
+        if (text4 != null)
+        {
+            originalText4 = text4.text;
+            originalText4FontSize = text4.resolvedStyle.fontSize;
+            originalText4FontStyle = text4.resolvedStyle.unityFontStyleAndWeight;
+            text4.style.opacity = new StyleFloat(1f);
+        }
+
+        // Set up Play Button (unchanged)
         if (playButton != null)
         {
             playButton.clicked += () => SceneManager.LoadScene("LivingStream");
         }
 
-        // Set up the Calibrate Button click event
+        // Set up Calibrate Button with fading
         if (toggleCalibrate != null)
         {
             toggleCalibrate.clicked += () =>
             {
-                // Stop any ongoing transition
                 if (currentTransition != null)
                 {
                     StopCoroutine(currentTransition);
@@ -76,11 +130,14 @@ public class MainUIHandler : MonoBehaviour
 
                 if (!isTideLowered)
                 {
-                    // Entering calibration mode: hide Play and Quit buttons
+                    // Entering calibration mode
                     if (playButton != null) playButton.style.display = DisplayStyle.None;
                     if (quitButton != null) quitButton.style.display = DisplayStyle.None;
 
-                    // Lowering the tide: calculate target values
+                    // Start text fade and change
+                    StartCoroutine(TextTransitionCoroutine(true));
+
+                    // Set target values and start transition for other elements
                     float targetOceanY = originalOceanPosition.y - oceanLowerAmount;
                     float targetLightIntensity = originalLightIntensity - lightIntensityChange;
                     float targetVolume = 0f;
@@ -91,9 +148,8 @@ public class MainUIHandler : MonoBehaviour
                     Vector3 targetSphereRedPosition = new Vector3(2.5f, 0, 0);
                     Vector3 targetSphereBluePosition = new Vector3(0, 0, 2.5f);
 
-                    // Start transition if all components are present
-                    if (ocean != null && directionalLight != null && backgroundMusic != null && 
-                        quadLogo != null && planeBlack != null && mainCamera != null && 
+                    if (ocean != null && directionalLight != null && backgroundMusic != null &&
+                        quadLogo != null && planeBlack != null && mainCamera != null &&
                         sphereRed != null && sphereBlue != null)
                     {
                         currentTransition = StartCoroutine(TransitionCoroutine(
@@ -104,8 +160,8 @@ public class MainUIHandler : MonoBehaviour
                             planeBlack.transform.position.y, targetPlaneBlackY,
                             mainCamera.transform.position, targetCameraPosition,
                             mainCamera.transform.rotation, targetCameraRotation,
-                            sphereRed.transform.position, targetSphereRedPosition,  
-                            sphereBlue.transform.position, targetSphereBluePosition 
+                            sphereRed.transform.position, targetSphereRedPosition,
+                            sphereBlue.transform.position, targetSphereBluePosition
                         ));
                     }
 
@@ -114,11 +170,14 @@ public class MainUIHandler : MonoBehaviour
                 }
                 else
                 {
-                    // Exiting calibration mode: show Play and Quit buttons
+                    // Exiting calibration mode
                     if (playButton != null) playButton.style.display = DisplayStyle.Flex;
                     if (quitButton != null) quitButton.style.display = DisplayStyle.Flex;
 
-                    // Raising the tide: restore original values
+                    // Start text fade and revert
+                    StartCoroutine(TextTransitionCoroutine(false));
+
+                    // Set original values and start transition for other elements
                     float targetOceanY = originalOceanPosition.y;
                     float targetLightIntensity = originalLightIntensity;
                     float targetVolume = originalVolume;
@@ -126,12 +185,11 @@ public class MainUIHandler : MonoBehaviour
                     float targetPlaneBlackY = originalPlaneBlackPosition.y;
                     Vector3 targetCameraPosition = originalCameraPosition;
                     Quaternion targetCameraRotation = originalCameraRotation;
-                    Vector3 targetSphereRedPosition = originalSphereRedPosition;  
+                    Vector3 targetSphereRedPosition = originalSphereRedPosition;
                     Vector3 targetSphereBluePosition = originalSphereBluePosition;
 
-                    // Start transition if all components are present
-                    if (ocean != null && directionalLight != null && backgroundMusic != null && 
-                        quadLogo != null && planeBlack != null && mainCamera != null && 
+                    if (ocean != null && directionalLight != null && backgroundMusic != null &&
+                        quadLogo != null && planeBlack != null && mainCamera != null &&
                         sphereRed != null && sphereBlue != null)
                     {
                         currentTransition = StartCoroutine(TransitionCoroutine(
@@ -142,8 +200,8 @@ public class MainUIHandler : MonoBehaviour
                             planeBlack.transform.position.y, targetPlaneBlackY,
                             mainCamera.transform.position, targetCameraPosition,
                             mainCamera.transform.rotation, targetCameraRotation,
-                            sphereRed.transform.position, targetSphereRedPosition,  
-                            sphereBlue.transform.position, targetSphereBluePosition 
+                            sphereRed.transform.position, targetSphereRedPosition,
+                            sphereBlue.transform.position, targetSphereBluePosition
                         ));
                     }
 
@@ -153,7 +211,7 @@ public class MainUIHandler : MonoBehaviour
             };
         }
 
-        // Set up the Quit Button click event
+        // Set up Quit Button (unchanged)
         if (quitButton != null)
         {
             quitButton.clicked += () =>
@@ -166,7 +224,98 @@ public class MainUIHandler : MonoBehaviour
         }
     }
 
-    // Coroutine to smoothly transition all elements over 2 seconds
+    // New coroutine for text fading and changing
+    private IEnumerator TextTransitionCoroutine(bool isCalibrating)
+    {
+        // Fade out text
+        yield return StartCoroutine(FadeTextCoroutine(1f, 0f, 0.5f));
+
+        // Apply text changes instantly when faded out
+        if (isCalibrating)
+        {
+            if (text1 != null)
+            {
+                text1.text = calibrationText1;
+                text1.style.fontSize = new StyleLength(24f);
+                text1.style.unityFontStyleAndWeight = FontStyle.Normal;
+            }
+            if (text2 != null)
+            {
+                text2.text = calibrationText2;
+                text2.style.fontSize = new StyleLength(24f);
+                // Font style unchanged
+            }
+            if (text3 != null)
+            {
+                text3.text = calibrationText3;
+                text3.style.fontSize = new StyleLength(24f);
+                text3.style.unityFontStyleAndWeight = FontStyle.Normal;
+            }
+            if (text4 != null)
+            {
+                text4.text = calibrationText4;
+                text4.style.fontSize = new StyleLength(24f);
+                // Font style unchanged
+            }
+        }
+        else
+        {
+            if (text1 != null)
+            {
+                text1.text = originalText1;
+                text1.style.fontSize = new StyleLength(originalText1FontSize);
+                text1.style.unityFontStyleAndWeight = originalText1FontStyle;
+            }
+            if (text2 != null)
+            {
+                text2.text = originalText2;
+                text2.style.fontSize = new StyleLength(originalText2FontSize);
+                text2.style.unityFontStyleAndWeight = originalText2FontStyle;
+            }
+            if (text3 != null)
+            {
+                text3.text = originalText3;
+                text3.style.fontSize = new StyleLength(originalText3FontSize);
+                text3.style.unityFontStyleAndWeight = originalText3FontStyle;
+            }
+            if (text4 != null)
+            {
+                text4.text = originalText4;
+                text4.style.fontSize = new StyleLength(originalText4FontSize);
+                text4.style.unityFontStyleAndWeight = originalText4FontStyle;
+            }
+        }
+
+        // Fade in text
+        yield return StartCoroutine(FadeTextCoroutine(0f, 1f, 0.5f));
+    }
+
+    // New coroutine for fading text opacity
+    private IEnumerator FadeTextCoroutine(float startOpacity, float endOpacity, float duration)
+    {
+        float timer = 0f;
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / duration);
+            float opacity = Mathf.Lerp(startOpacity, endOpacity, t);
+
+            if (text1 != null) text1.style.opacity = new StyleFloat(opacity);
+            if (text2 != null) text2.style.opacity = new StyleFloat(opacity);
+            if (text3 != null) text3.style.opacity = new StyleFloat(opacity);
+            if (text4 != null) text4.style.opacity = new StyleFloat(opacity);
+
+            yield return null;
+        }
+
+        // Ensure final opacity is set
+        if (text1 != null) text1.style.opacity = new StyleFloat(endOpacity);
+        if (text2 != null) text2.style.opacity = new StyleFloat(endOpacity);
+        if (text3 != null) text3.style.opacity = new StyleFloat(endOpacity);
+        if (text4 != null) text4.style.opacity = new StyleFloat(endOpacity);
+    }
+
+    // Updated TransitionCoroutine without font size lerping
     private IEnumerator TransitionCoroutine(
         float startOceanY, float targetOceanY,
         float startLightIntensity, float targetLightIntensity,
@@ -175,73 +324,59 @@ public class MainUIHandler : MonoBehaviour
         float startPlaneBlackY, float targetPlaneBlackY,
         Vector3 startCameraPosition, Vector3 targetCameraPosition,
         Quaternion startCameraRotation, Quaternion targetCameraRotation,
-        Vector3 startSphereRedPosition, Vector3 targetSphereRedPosition,  
-        Vector3 startSphereBluePosition, Vector3 targetSphereBluePosition 
+        Vector3 startSphereRedPosition, Vector3 targetSphereRedPosition,
+        Vector3 startSphereBluePosition, Vector3 targetSphereBluePosition
     )
     {
         float timer = 0f;
         while (timer < 2f)
         {
             timer += Time.deltaTime;
-            float t = Mathf.Clamp01(timer / 2f); // Interpolation factor (0 to 1)
+            float t = Mathf.Clamp01(timer / 2f);
 
-            // Update ocean position
+            // Lerp other elements
             if (ocean != null)
             {
                 Vector3 pos = ocean.transform.position;
                 pos.y = Mathf.Lerp(startOceanY, targetOceanY, t);
                 ocean.transform.position = pos;
             }
-
-            // Update light intensity
             if (directionalLight != null)
             {
                 directionalLight.intensity = Mathf.Lerp(startLightIntensity, targetLightIntensity, t);
             }
-
-            // Update audio volume
             if (backgroundMusic != null)
             {
                 backgroundMusic.volume = Mathf.Lerp(startVolume, targetVolume, t);
             }
-
-            // Update quad position
             if (quadLogo != null)
             {
                 quadLogo.transform.position = Vector3.Lerp(startQuadPosition, targetQuadPosition, t);
             }
-
-            // Update PlaneBlack y-position
             if (planeBlack != null)
             {
                 Vector3 pos = planeBlack.transform.position;
                 pos.y = Mathf.Lerp(startPlaneBlackY, targetPlaneBlackY, t);
                 planeBlack.transform.position = pos;
             }
-
-            // Update Main Camera position and rotation
             if (mainCamera != null)
             {
                 mainCamera.transform.position = Vector3.Lerp(startCameraPosition, targetCameraPosition, t);
                 mainCamera.transform.rotation = Quaternion.Lerp(startCameraRotation, targetCameraRotation, t);
             }
-
-            // Update SphereRed position
             if (sphereRed != null)
             {
                 sphereRed.transform.position = Vector3.Lerp(startSphereRedPosition, targetSphereRedPosition, t);
             }
-
-            // Update SphereBlue position
             if (sphereBlue != null)
             {
                 sphereBlue.transform.position = Vector3.Lerp(startSphereBluePosition, targetSphereBluePosition, t);
             }
 
-            yield return null; // Wait for the next frame
+            yield return null;
         }
 
-        // Set final values to ensure precision
+        // Set final values
         if (ocean != null)
         {
             Vector3 pos = ocean.transform.position;

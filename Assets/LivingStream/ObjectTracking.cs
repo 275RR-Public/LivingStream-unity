@@ -1,43 +1,28 @@
 using UnityEngine;
-using System.Net.Sockets;
-using System.Text;
 using System.Collections.Generic;
-using System.Collections.Concurrent;
 using UnityEngine.Rendering.HighDefinition;
-
-// Define a serializable class for individual tracking data
-[System.Serializable]
-public class TrackData
-{
-    public int id;
-    public float[] position; // Array for [x, y, z] or null
-}
-
-// Define a serializable wrapper for the list of tracking data
-[System.Serializable]
-public class TrackingDataList
-{
-    public List<TrackData> tracks;
-}
 
 public class ObjectTracking : MonoBehaviour
 {
-    public GameObject trackedPersonPrefab; // Assign in Inspector with an empty game object, "TrackingManager"
-    public WaterSurface river;          // Assign the river GameObject to TrackingManager
-    private UdpClient udpClient;
+    public GameObject trackedPersonPrefab;
+    public WaterSurface river;
+    private UdpListener udpListener;
     private Dictionary<int, GameObject> trackedObjects = new Dictionary<int, GameObject>();
-    private ConcurrentQueue<List<TrackData>> trackingDataQueue = new ConcurrentQueue<List<TrackData>>();
     private Dictionary<int, float> lastSeenTimes = new Dictionary<int, float>();
     private float timeoutDuration = 2f;
     private Dictionary<int, Vector3> targetPositions = new Dictionary<int, Vector3>();
     private int frameCounter = 0;
     private const int checkInterval = 10;
-    private bool isClosing = false;
 
     void Start()
     {
-        udpClient = new UdpClient(5005);
-        udpClient.BeginReceive(ReceiveCallback, null);
+        // Find the UdpListener instance
+        udpListener = UdpListener.Instance;
+        if (udpListener == null)
+        {
+            Debug.LogError("UdpListener instance not found! Ensure UdpListener exists in the scene.");
+            return;
+        }
 
         if (trackedPersonPrefab == null)
         {
@@ -52,41 +37,14 @@ public class ObjectTracking : MonoBehaviour
         }
     }
 
-    void ReceiveCallback(System.IAsyncResult ar)
-    {
-        if (isClosing)
-            return;
-
-        try
-        {
-            var endpoint = new System.Net.IPEndPoint(System.Net.IPAddress.Any, 5005);
-            byte[] data = udpClient.EndReceive(ar, ref endpoint);
-            string message = Encoding.UTF8.GetString(data);
-            Debug.Log("Received UDP message: " + message);
-
-            string wrappedMessage = "{\"tracks\":" + message + "}";
-            Debug.Log("Wrapped message: " + wrappedMessage);
-
-            TrackingDataList trackingDataList = JsonUtility.FromJson<TrackingDataList>(wrappedMessage);
-            List<TrackData> trackingData = trackingDataList.tracks;
-            Debug.Log("Deserialized tracking data count: " + trackingData.Count);
-
-            trackingDataQueue.Enqueue(trackingData);
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error in ReceiveCallback: " + e.Message);
-        }
-
-        if (!isClosing)
-            udpClient.BeginReceive(ReceiveCallback, null);
-    }
-
     void Update()
     {
+        if (udpListener == null)
+            return;
+
         HashSet<int> activeIds = new HashSet<int>();
         List<TrackData> latestTrackingData = null;
-        while (trackingDataQueue.TryDequeue(out List<TrackData> trackingData))
+        while (udpListener.TryDequeueTrackingData(out List<TrackData> trackingData))
         {
             latestTrackingData = trackingData;
         }
@@ -103,11 +61,7 @@ public class ObjectTracking : MonoBehaviour
                 if (track.position != null && track.position.Length == 3)
                 {
                     Vector3 realSensePos = new Vector3(track.position[0], track.position[1], track.position[2]);
-                    Debug.Log($"RealSense position: {realSensePos}");
-
                     Vector3 unityPos = new Vector3(realSensePos.x, 0f, realSensePos.z);
-                    Debug.Log($"Unity position: {unityPos}");
-
                     targetPositions[id] = unityPos;
 
                     if (!trackedObjects.ContainsKey(id))
@@ -116,7 +70,6 @@ public class ObjectTracking : MonoBehaviour
                         newBox.name = "TrackedPerson_" + id;
                         trackedObjects[id] = newBox;
 
-                        // Assign the river to the FloatingIceberg script
                         FloatingIceberg floatingIceberg = newBox.GetComponent<FloatingIceberg>();
                         if (floatingIceberg != null && river != null)
                         {
@@ -184,12 +137,5 @@ public class ObjectTracking : MonoBehaviour
                 obj.transform.position = Vector3.Lerp(currentPos, targetXZ, Time.deltaTime * 5f);
             }
         }
-    }
-
-    void OnDestroy()
-    {
-        isClosing = true;
-        if (udpClient != null)
-            udpClient.Close();
     }
 }

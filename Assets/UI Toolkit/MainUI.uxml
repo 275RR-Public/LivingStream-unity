@@ -1,6 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainUIStyle.uss?fileID=7433441132597879392&amp;guid=4241be2a33650004487465a679dca5b0&amp;type=3#MainUIStyle" />
-    <ui:VisualElement style="height: 90%; align-items: center; justify-content: flex-end; align-self: center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; opacity: 0.75;">
+    <ui:VisualElement style="flex-grow: 1; flex-direction: column; position: absolute; top: 45%; bottom: 55%; left: 5%;">
+        <ui:Label text="US Army Corps of Engineers" name="text1" style="-unity-font-style: bold; font-size: 40px; margin-bottom: 30px; -unity-text-align: middle-left;" />
+        <ui:Label text="in collaboration with" name="text2" style="-unity-text-align: middle-left; font-size: 24px; margin-bottom: 30px; padding-left: 50px;" />
+        <ui:Label text="UTA Computer Science and Engineering" name="text3" style="font-size: 30px; -unity-font-style: bold; margin-bottom: 30px; -unity-text-align: middle-left;" />
+        <ui:Label text="proudly presents..." name="text4" style="-unity-text-align: middle-left; font-size: 24px; margin-bottom: 30px; padding-left: 50px;" />
+    </ui:VisualElement>
+    <ui:VisualElement style="height: 90%; align-items: center; justify-content: flex-end; align-self: center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; opacity: 0.5;">
         <ui:Button text="Calibrate&#x9;" name="CalibrateButton" class="all-button" style="margin-bottom: 20px;" />
         <ui:Button text="Play" name="PlayButton" class="all-button" style="margin-bottom: 20px;" />
         <ui:Button text="Quit" name="QuitButton" class="all-button" />
