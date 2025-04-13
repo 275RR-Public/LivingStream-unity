@@ -143,10 +143,10 @@ public class MainUIHandler : MonoBehaviour
                     float targetVolume = 0f;
                     Vector3 targetQuadPosition = originalQuadPosition - new Vector3(0, quadMoveAmount, 0);
                     float targetPlaneBlackY = 0f;
-                    Vector3 targetCameraPosition = new Vector3(0, 5, 0);
+                    Vector3 targetCameraPosition = new Vector3(0, 10.7f, 0);
                     Quaternion targetCameraRotation = Quaternion.Euler(90, 0, 0);
-                    Vector3 targetSphereRedPosition = new Vector3(2.5f, 0, 0);
-                    Vector3 targetSphereBluePosition = new Vector3(0, 0, 2.5f);
+                    Vector3 targetSphereRedPosition = new Vector3(5, 0, 0);
+                    Vector3 targetSphereBluePosition = new Vector3(0, 0, 5);
 
                     if (ocean != null && directionalLight != null && backgroundMusic != null &&
                         quadLogo != null && planeBlack != null && mainCamera != null &&
