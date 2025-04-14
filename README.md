@@ -12,7 +12,7 @@ UTA Computer Science and Engineering \
 LivingStream Senior Design Team
 
 Arham Ali ([GitHub](https://github.com/ara1399/)) \
-Bryan Ukeje​ [Github](https://github.com/BUkeje) \
+Bryan Ukeje​ ([Github](https://github.com/BUkeje)) \
 Daniel Hofer​ ([GitHub](https://github.com/275RR-Public/)) \
 William Forbes​
 
