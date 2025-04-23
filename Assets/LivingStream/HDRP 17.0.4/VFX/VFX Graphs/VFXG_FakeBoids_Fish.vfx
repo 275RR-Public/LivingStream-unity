@@ -19,8 +19,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: -921
     y: -511
-    width: 2303
-    height: 4253
+    width: 2301
+    height: 4228
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13179,7 +13179,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1.28
+      m_SerializableObject: 3
     m_Space: -1
   m_Property:
     name: Bounce

@@ -18,35 +18,40 @@ public class FishRepulsion : MonoBehaviour
     {
         if (tracker == null) return;
 
-        // Grab all runtime‐spawned fish
+        // Cache once per frame
         var fishArray = GameObject.FindGameObjectsWithTag(fishTag);
         if (fishArray.Length == 0) return;
 
         // For each tracked person
         foreach (var kv in tracker.TrackedObjects)
         {
-            Vector3 personPos = kv.Value.transform.position;
+            Vector3 person = kv.Value.transform.position;
+            float px = person.x, pz = person.z;
 
-            // Only use XZ of person, so the "sphere" extends infinitely up/down
-            float px = personPos.x;
-            float pz = personPos.z;
-
-            // Push every fish away on the XZ plane
+            // Push all fish away in XZ
             foreach (var fish in fishArray)
             {
                 Vector3 fPos = fish.transform.position;
-                // horizontal delta
                 float dx = fPos.x - px;
                 float dz = fPos.z - pz;
-
                 float dist = Mathf.Sqrt(dx * dx + dz * dz);
+
                 if (dist > 0f && dist < influenceRadius)
                 {
-                    // direction purely in XZ
+                    // horizontal direction
                     Vector3 dir = new Vector3(dx, 0f, dz).normalized;
-                    // apply push
-                    fish.transform.position = fPos + dir * pushSpeed * Time.deltaTime;
-                    // Y stays exactly what it was (we never touched fPos.y)
+                    // target further out at the edge of your sphere
+                    Vector3 target = new Vector3(
+                        px + dir.x * influenceRadius,
+                        fPos.y,
+                        pz + dir.z * influenceRadius
+                    );
+                    // smoothly move toward that target
+                    fish.transform.position = Vector3.MoveTowards(
+                        fPos,
+                        target,
+                        pushSpeed * Time.deltaTime
+                    );
                 }
             }
         }

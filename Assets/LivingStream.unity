@@ -335,7 +335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 596275195783390324, guid: 33d9e955f195ee547ac2bfc586f383a1, type: 3}
       propertyPath: m_TagString
-      value: Fish
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1848783936432118900, guid: 33d9e955f195ee547ac2bfc586f383a1, type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
@@ -1443,8 +1443,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boidVFX: {fileID: 682244753}
   tracker: {fileID: 942067230}
-  personRadius: 2
-  sphereY: -1.33
+  personRadius: 2.125
+  sphereY: -1.35
 --- !u!2083052967 &682244753 stripped
 VisualEffect:
   m_CorrespondingSourceObject: {fileID: 1848783936432118900, guid: 33d9e955f195ee547ac2bfc586f383a1, type: 3}
@@ -2184,7 +2184,7 @@ MonoBehaviour:
   tracker: {fileID: 942067230}
   fishTag: Fish
   influenceRadius: 3
-  pushSpeed: 3
+  pushSpeed: 10
 --- !u!1001 &974883611
 PrefabInstance:
   m_ObjectHideFlags: 0
