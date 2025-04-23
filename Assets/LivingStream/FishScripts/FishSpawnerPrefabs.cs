@@ -34,6 +34,7 @@ public class FishSpawner : MonoBehaviour
         position.y = selectedPrefab.transform.position.y;
 
         GameObject newFish = Instantiate(selectedPrefab, position, Quaternion.identity);
+        newFish.tag = "Fish";
         FishMovement fishMovement = newFish.GetComponent<FishMovement>();
 
         if (fishMovement != null)
