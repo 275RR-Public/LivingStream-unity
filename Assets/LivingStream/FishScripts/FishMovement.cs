@@ -17,8 +17,8 @@ public class FishMovement : MonoBehaviour
     private bool isFading = false;
     private bool directionInitialized = false;
 
-    private float leftBound = -15f;
-    private float rightBound = 15f;
+    private float leftBound = -16f;
+    private float rightBound = 16f;
     private float bottomBound = -7f;
     private float topBound = 7f;
 

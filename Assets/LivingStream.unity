@@ -2529,7 +2529,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 62.212185, y: 56.15278, z: 38.138565}
+  m_Size: {x: 55, y: 114, z: 75}
   m_Center: {x: -2.830641, y: -0.08048435, z: 19.069296}
 --- !u!21 &1171494895
 Material:
@@ -4996,7 +4996,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 35, y: 56.15278, z: 38.138577}
+  m_Size: {x: 50, y: 56.15278, z: 50}
   m_Center: {x: -2.8305643, y: -0.080483176, z: 19.069286}
 --- !u!21 &1960883598
 Material:
@@ -5421,7 +5421,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 62.2122, y: 56.15277, z: 38.13858}
+  m_Size: {x: 62.2122, y: 75, z: 65}
   m_Center: {x: -2.8306088, y: -0.080469474, z: 19.069271}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
