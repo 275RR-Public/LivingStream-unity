@@ -1,3 +1,9 @@
+/* ##### SPAWN 10 RANDOM FISH FROM START ##### */
+/* ##### FISH SPAWN AT Y POSITION OF PREFAB ##### */
+/* ##### FISH RESPAWN AT BORDER & SWIM CORRECTLY (no continual prefab switching at border) ##### */
+/* ##### FISH SWAY AWAY FROM EACH OTHER & ROCKS IN ENVIRONMENT ##### */
+/* ##### RUN WITH FS5.cs ##### */
+
 using UnityEngine;
 using System.Collections;
 
@@ -16,14 +22,34 @@ public class FishMovement : MonoBehaviour
     private float bottomBound = -7f;
     private float topBound = 7f;
 
+    public float avoidanceStrength = 1.5f;  // How hard to push away
+
+
     // Set externally by FishSpawner
     public void InitializeDirection(Vector3 direction)
     {
         swimDirection = direction.normalized;
         directionInitialized = true;
 
-        // Apply rotation flip if swimming left
-        if (swimDirection == Vector3.left)
+        string prefabName = gameObject.name.Replace("(Clone)", "").Trim();
+
+        float yRotationOverride = prefabName switch
+        {
+            "Spotted Gar No Animation" => 90f,
+            "Blue Catfish Finished" => 90f,
+            "BlackCrappieNoAnimation" => 180f,
+            _ => -1f // Use default logic
+        };
+
+        if (yRotationOverride >= 0f)
+        {
+            transform.rotation = Quaternion.Euler(
+                transform.rotation.eulerAngles.x,
+                yRotationOverride,
+                transform.rotation.eulerAngles.z
+            );
+        }
+        else if (swimDirection == Vector3.left)
         {
             transform.rotation = Quaternion.Euler(
                 transform.rotation.eulerAngles.x,
@@ -37,7 +63,6 @@ public class FishMovement : MonoBehaviour
     {
         fishRenderer = GetComponentInChildren<Renderer>();
 
-        // Only assign a random direction if not externally set
         if (!directionInitialized)
         {
             InitializeDirection(Random.value < 0.5f ? Vector3.left : Vector3.right);
@@ -120,6 +145,31 @@ public class FishMovement : MonoBehaviour
             color.a = alpha;
             material.color = color;
             yield return null;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        // Avoid other fish
+        if (other.CompareTag("Fish") && other.gameObject != this.gameObject)
+        {
+            Vector3 away = transform.position - other.transform.position;
+            away.y = 0f;
+
+            swimDirection += away.normalized * avoidanceStrength * Time.deltaTime;
+            swimDirection.x = Mathf.Sign(swimDirection.x);
+            swimDirection = new Vector3(swimDirection.x, 0f, swimDirection.z).normalized;
+        }
+
+        // Avoid rocks or environmental obstacles
+        if (other.CompareTag("Rocks"))
+        {
+            Vector3 away = transform.position - other.ClosestPoint(transform.position);
+            away.y = 0f;
+
+            swimDirection += away.normalized * (avoidanceStrength * 1.5f) * Time.deltaTime;
+            swimDirection.x = Mathf.Sign(swimDirection.x);
+            swimDirection = new Vector3(swimDirection.x, 0f, swimDirection.z).normalized;
         }
     }
 }
