@@ -138,4 +138,6 @@ public class ObjectTracking : MonoBehaviour
             }
         }
     }
+
+    public IReadOnlyDictionary<int, GameObject> TrackedObjects => trackedObjects;
 }

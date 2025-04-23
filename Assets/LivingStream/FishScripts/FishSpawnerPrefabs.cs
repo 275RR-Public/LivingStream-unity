@@ -1,3 +1,7 @@
+/* ##### FISH RESPAWN AT BORDER & SWIM CORRECTLY (no continual prefab switching at border) ##### */
+/* ##### NO FISIH ARE SWIMMING FACING VERTICAL ##### */
+/* ##### RUN WITH FM6.cs ##### */
+
 using UnityEngine;
 
 public class FishSpawner : MonoBehaviour
