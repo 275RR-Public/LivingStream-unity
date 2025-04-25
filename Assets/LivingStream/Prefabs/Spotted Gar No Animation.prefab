@@ -60,6 +60,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8491820573385395824, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_AreaSize.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8491820573385395824, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_AreaSize.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8324011235985715747, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_ShadowResolution.m_UseOverride
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6722085885383957590, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_AreaSize.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6722085885383957590, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_AreaSize.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6691798392009906193, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_ShadowResolution.m_UseOverride
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4549114872662225833, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_ShadowResolution.m_UseOverride
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1976041351628028397, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_ShadowResolution.m_UseOverride
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1489742300551115853, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_ShadowResolution.m_UseOverride
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355606356607160977, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_AreaSize.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 355606356607160977, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_AreaSize.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 826381599129644957, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_AreaSize.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 826381599129644957, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_AreaSize.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
       propertyPath: m_Name
       value: Spotted Gar No Animation
@@ -68,6 +120,22 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Fish
       objectReference: {fileID: 0}
+    - target: {fileID: 1098812680748101214, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_AreaSize.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098812680748101214, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_AreaSize.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144488545628032015, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144488545628032015, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 65702495048144492, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
@@ -75,20 +143,20 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8763408302840515511}
+      addedObject: {fileID: -136110659924150753}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -129917356776093727}
+      addedObject: {fileID: 4417302794993282141}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3348522333620937502}
+      addedObject: {fileID: -789545878085911101}
   m_SourcePrefab: {fileID: 100100000, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
 --- !u!1 &8248267991516520721 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 07ab10025a81a44b985dfadb63432080, type: 3}
   m_PrefabInstance: {fileID: 9130720420823833664}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8763408302840515511
+--- !u!114 &-136110659924150753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,14 +165,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8248267991516520721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bdecef93c3942b0a4fb91420e5f229, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b71445c1e65fa043960ea12867e8b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
-  fadeDuration: 1
-  avoidanceStrength: 1.5
---- !u!65 &-129917356776093727
-BoxCollider:
+--- !u!135 &4417302794993282141
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -122,9 +187,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 25, z: 70}
-  m_Center: {x: -0.5, y: -2, z: 0}
---- !u!54 &3348522333620937502
+  m_Radius: 2.31
+  m_Center: {x: -0.56, y: -1.84, z: 6.28}
+--- !u!54 &-789545878085911101
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

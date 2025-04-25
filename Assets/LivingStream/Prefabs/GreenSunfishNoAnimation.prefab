@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.004
+      value: 0.003
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.004
+      value: 0.003
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.004
+      value: 0.003
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -60,6 +60,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6722085885383957590, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
+      propertyPath: m_AreaSize.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6722085885383957590, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
+      propertyPath: m_AreaSize.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1976041351628028397, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
+      propertyPath: m_UseContactShadow.m_Override
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1976041351628028397, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
+      propertyPath: m_ShadowResolution.m_UseOverride
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1220094674109062517, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
       propertyPath: m_Name
       value: GreenSunfishNoAnimation
@@ -75,20 +99,20 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4853097287517295255}
+      addedObject: {fileID: -3915059556286380994}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2939069752504702305}
+      addedObject: {fileID: -7597275038713040446}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3805658617012765338}
+      addedObject: {fileID: -379083502947907237}
   m_SourcePrefab: {fileID: 100100000, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
 --- !u!1 &4194362254985679627 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 81f5f1a11980746e1a63283f5f877a3d, type: 3}
   m_PrefabInstance: {fileID: 3959851469581545050}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4853097287517295255
+--- !u!114 &-3915059556286380994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,14 +121,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4194362254985679627}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bdecef93c3942b0a4fb91420e5f229, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b71445c1e65fa043960ea12867e8b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
-  fadeDuration: 1
-  avoidanceStrength: 1.5
---- !u!65 &2939069752504702305
-BoxCollider:
+--- !u!135 &-7597275038713040446
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -122,9 +143,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 800, y: 550, z: 550}
-  m_Center: {x: 0, y: 250, z: 0}
---- !u!54 &-3805658617012765338
+  m_Radius: 350
+  m_Center: {x: 121.3, y: 241.32, z: 0}
+--- !u!54 &-379083502947907237
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

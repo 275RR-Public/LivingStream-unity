@@ -12,10 +12,10 @@ public class BoidPersonDriver : MonoBehaviour
     public ObjectTracking tracker;
 
     [Tooltip("How big the collision sphere should be")]
-    public float personRadius = 2f;
+    public float personRadius = 3f;
 
     [Tooltip("Fixed Y height for the collision sphere (e.g. water level)")]
-    public float sphereY = 0.5f;
+    public float sphereY = -1f;
 
     // Blackboard parameter names
     static readonly int k_PersonPosID    = Shader.PropertyToID("PersonPosition");
